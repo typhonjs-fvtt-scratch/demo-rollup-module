@@ -20,7 +20,7 @@ This demo module integrates several powerful libraries that will greatly extend 
 Rollup with source map generation several essential plugins for loading HTML / JSON / copying files / replacing strings 
 are installed along with <a target=”_blank” href="https://postcss.org/">PostCSS</a> & 
 <a target=”_blank” href="https://sass-lang.com/">Sass</a> configured out of the box to output all processed CSS to 
-`styles.css` during the build process which is referenced by 
+`styles.css` during the build process which is subsequently referenced by 
 <a target=”_blank” href="https://github.com/typhonjs-fvtt/demo-rollup-module/blob/main/module/module.json">module.json</a>. 
 In addition, <a target=”_blank” href="https://www.npmjs.com/package/terser">Terser</a> is setup for conditional 
 minification / mangling and <a target=”_blank” href="https://www.npmjs.com/package/dotenv-safe">dotenv</a> provides a 
@@ -39,9 +39,9 @@ of "Hello World" which is loaded via an
 and <a target=”_blank” href="https://github.com/typhonjs-fvtt/demo-rollup-module/blob/main/module/json/dialog.json">JSON file</a> 
 directly via Handlebars in   
 <a target=”_blank” href="https://github.com/typhonjs-fvtt/demo-rollup-module/blob/main/module/src/DemoDialog.js#L1-L4">DemoDialog</a>. 
-This differs from the standard way to load a template with the Foundry client code via 
-<a target=”_blank” href="https://foundryvtt.com/api/global.html#renderTemplate">renderTemplate</a>. The dialog shows 
-basic user input using async / await. A second button throws an error and outputs a stack trace w/ 
+This provides a second way to load templates and differs from the standard way to load a template with the Foundry 
+client code via <a target=”_blank” href="https://foundryvtt.com/api/global.html#renderTemplate">renderTemplate</a>. The 
+dialog shows basic user input using async / await. A second button throws an error and outputs a stack trace w/ 
 line & column numbers in the console. This is for testing source maps with the minified code verifying that one can use 
 <a target=”_blank” href="https://www.npmjs.com/package/stacktracify">stacktracify</a>.
 Copy the stack trace from the dev console and apply it against the source maps if you are not shipping them. Also if 
@@ -53,12 +53,14 @@ in the browser, but how to accomplish this task is demonstrated in addition to c
 in its own bundle apart from the main module code. Ideally you'll import an ES6 NPM module and just use the 
 `@rollup/plugin-node-resolve` plugin.
 <p></p>
-So what does this all mean; where is the power in this developer setup? What makes Rollup so great for Foundry 
+What does this all mean; where is the power in this developer setup? What makes Rollup so great for Foundry 
 development and application deployment in general is its 
 <a target=”_blank” href="https://rollupjs.org/guide/en/#tree-shaking">tree-shaking</a> capability. Through static 
 analysis Rollup just pulls in the code that is accessed in your project. This includes Sass / CSS files and source code.   
-Configuration of Rollup is really flexible and concise with many plugins to integrate new functionality and build 
-simple to complex deployment pipelines.
+Configuration of Rollup is really flexible and concise allowing simple to more involved build pipelines with many 
+plugins that already accomplish common and not so common tasks let alone integration possibilities with PostCSS that 
+brings a whole library of CSS related transformation plugins into play. I personally find the configuration as code 
+approach Rollup takes to be intuitive and the best way currently to supercharge deployment. 
 <p></p>
 Setup steps for `demo-rollup-module`:
 <ul>
