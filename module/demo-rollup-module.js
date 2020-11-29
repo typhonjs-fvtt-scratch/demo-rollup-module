@@ -11,7 +11,7 @@ const s_REPLACE_TEXT = 'THIS WILL BE REPLACED WITH - YO!';  // This text will be
  */
 Hooks.once('ready', async () =>
 {
-   console.log(ansiColors.green('Hello world green underline from ansi-color Node module!'));
+   console.log(ansiColors.green('Hello green world from ansi-color NPM module!'));
 
    console.log(ansiColors.green(
     `Just showing that you can do text replacement with a rollup plugin: ${s_REPLACE_TEXT}`));
