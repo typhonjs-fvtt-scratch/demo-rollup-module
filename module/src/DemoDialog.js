@@ -1,4 +1,4 @@
-import data       from '../json/msg.json'             // You can import JSON w/ @rollup/plugin-json
+import data       from '../json/dialog.json'          // You can import JSON w/ @rollup/plugin-json
 import dialogHTML from '../templates/dialog.html'     // You can import strings w/ rollup-plugin-string
 
 import '../sass/dialog.scss';                         // Import the scss file so Rollup picks it up.
