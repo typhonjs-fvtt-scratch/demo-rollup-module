@@ -1,0 +1,8 @@
+// dialog.scss - Uses the ID / DemoRollupDialog assigned via DemoDialog.js and the default `dialog-content` class.
+@use 'base';
+
+#DemoRollupDialog .dialog-content {
+  color: base.$primary-color;
+  font-family: base.$font-stack;
+  font-size: base.$font-size;
+}
