@@ -1,4 +1,4 @@
-# rollup-demo-module
+# demo-rollup-module
 <table>
 <tr>
 <th width="20%"><img src="https://i.imgur.com/cuawVSL.png"></th>
