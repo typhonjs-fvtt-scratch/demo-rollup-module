@@ -19,10 +19,12 @@ freely and seamlessly combine the most useful individual functions from your fav
 This demo module integrates several powerful libraries that will greatly extend your development activities. Beyond
 Rollup with source map generation several essential plugins for loading HTML / JSON / copying files / replacing strings 
 are installed along with <a target=”_blank” href="https://postcss.org/">PostCSS</a> & 
-<a target=”_blank” href="https://sass-lang.com/">Sass</a> are configured to output all processed CSS to `styles.css` in 
-addition to <a target=”_blank” href="https://www.npmjs.com/package/terser">Terser</a> for conditional minification / 
-mangling and <a target=”_blank” href="https://www.npmjs.com/package/dotenv-safe">dotenv</a> to provide a flexible way 
-to configure various deployment environments. All of the code is well commented especially the 
+<a target=”_blank” href="https://sass-lang.com/">Sass</a> configured out of the box to output all processed CSS to 
+`styles.css` during the build process which is referenced by 
+<a target=”_blank” href="https://github.com/typhonjs-fvtt/demo-rollup-module/blob/main/module/module.json">module.json</a>. 
+In addition, <a target=”_blank” href="https://www.npmjs.com/package/terser">Terser</a> is setup for conditional 
+minification / mangling and <a target=”_blank” href="https://www.npmjs.com/package/dotenv-safe">dotenv</a> provides a 
+flexible way to configure various deployment environments. All of the code is well commented especially the 
 <a target=”_blank” href="https://github.com/typhonjs-fvtt/demo-rollup-module/blob/main/rollup.config.js">rollup.config.js</a> 
 file.
 <p></p>
@@ -31,9 +33,15 @@ So what does this repo / demo module do? Something right? Well... The main entry
 loads an NPM module 
 (<a target=”_blank” href="https://www.npmjs.com/package/ansi-colors">ansi-colors</a>) in an externally separated bundle 
 and is demonstrated by console output. After Foundry has started up and is ready this module pops up a dialog showing the 
-Sass styling of "Hello World" which is loaded via an HTML template and JSON files directly via Handlebars in  
+<a target=”_blank” href="https://github.com/typhonjs-fvtt/demo-rollup-module/blob/main/module/sass/dialog.scss">Sass styling</a> 
+of "Hello World" which is loaded via an 
+<a target=”_blank” href="https://github.com/typhonjs-fvtt/demo-rollup-module/blob/main/module/templates/dialog.html">HTML template</a> 
+and <a target=”_blank” href="https://github.com/typhonjs-fvtt/demo-rollup-module/blob/main/module/json/dialog.json">JSON file</a> 
+directly via Handlebars in   
 <a target=”_blank” href="https://github.com/typhonjs-fvtt/demo-rollup-module/blob/main/module/src/DemoDialog.js#L1-L4">DemoDialog</a>. 
-The dialog shows basic user input using async / await. A second button throws an error and outputs a stack trace w/ 
+This differs from the standard way to load a template with the Foundry client code via 
+<a target=”_blank” href="https://foundryvtt.com/api/global.html#renderTemplate">renderTemplate</a>. The dialog shows 
+basic user input using async / await. A second button throws an error and outputs a stack trace w/ 
 line & column numbers in the console. This is for testing source maps with the minified code verifying that one can use 
 <a target=”_blank” href="https://www.npmjs.com/package/stacktracify">stacktracify</a>.
 Copy the stack trace from the dev console and apply it against the source maps if you are not shipping them. Also if 
@@ -45,11 +53,21 @@ in the browser, but how to accomplish this task is demonstrated in addition to c
 in its own bundle apart from the main module code. Ideally you'll import an ES6 NPM module and just use the 
 `@rollup/plugin-node-resolve` plugin.
 <p></p>
-Installation:
+So what does this all mean; where is the power in this developer setup? What makes Rollup so great for Foundry 
+development and application deployment in general is its 
+<a target=”_blank” href="https://rollupjs.org/guide/en/#tree-shaking">tree-shaking</a> capability. Through static 
+analysis Rollup just pulls in the code that is accessed in your project. This includes Sass / CSS files and source code.   
+Configuration of Rollup is really flexible and concise with many plugins to integrate new functionality and build 
+simple to complex deployment pipelines.
+<p></p>
+Setup steps for `demo-rollup-module`:
 <ul>
-<li>Install the latest Node version</li>
-<li>Run `npm install`</li>
-<li>Use an IDE to run the NPM scripts</li>
+    <li>Install Foundry VTT</li>
+    <li>Install the latest Node version</li>
+    <li>Clone this repo</li>
+    <li>Run `npm install`</li>
+    <li>Use an IDE to run the NPM scripts</li>
+    <li>Change the deployment path in the *.env files as appropriate</li>
 </ul>
 By default the module is bundled into the local `./deploy` or `./dist` directories. You can change the deploy path
 by modifying the *.env files in the `./env` directory. While the *.env files are checked into this repo normally you 
@@ -60,12 +78,22 @@ in `C:\games\FoundryVTT-Data` then change DEPLOY_PATH to
 for local testing. Make sure to restart Foundry the first time deploying locally. Of course when you start on your own 
 module replace `demo-rollup-module` with the name of the module you are developing.
 <p></p>
-The description above doesn't cover all the details, so you are left up to your own to explore the repo. The comments 
-in the code and configuration files should provide insight. This is the essential build & development process for all my 
-"TyphonJS FVTT" modules forthcoming. Best of luck and I hope you enjoy developing for Foundry with Rollup too. I will
-provide more details in time, but feel free to reach out on Discord (MLeahy#4299) or post an issue in this repo. Drop 
-by <a target=”_blank” href="https://discord.gg/47ndUBqxC4">The League of 
-Extraordinary Foundry developers</a> or the main Foundry VTT Discord servers too!   
+Do reference the essential Foundry <a target=”_blank” href="https://foundryvtt.com/article/module-development/">module 
+development article</a>. Also reference the <a target=”_blank” href="https://foundryvtt.com/api/">Foundry client API docs</a>.
+Ultimately you need to get familiar with `foundry.js` which is the core client code your module runs in and the interactions 
+with your chosen game system such as <a target=”_blank” href="https://gitlab.com/foundrynet/dnd5e">D&D5e</a>, but there are 
+many others being developed as well. You can find the `foundry.js` file in the `./FoundryVTT/resources/app/public/scripts` 
+directory under your main Foundry installation. If you think you have found a bug or just have an idea for a useful 
+feature enhancement to the core Foundry code open an 
+<a target=”_blank” href="https://gitlab.com/foundrynet/foundryvtt/-/issues">issue on the main tracker</a>. 
+<p></p>
+The description above doesn't cover all the details for Foundry development and using this repo as a starter project, 
+so you are left up to your own to explore the repo for now. The comments in the code and configuration files should provide 
+insight. This is the essential build & development process for all my "TyphonJS FVTT" modules forthcoming. Best of luck 
+and I hope you enjoy developing for Foundry with Rollup too. I will provide more details in time, but feel free to 
+reach out on Discord (MLeahy#4299) or post an issue in this repo. Drop by 
+<a target=”_blank” href="https://discord.gg/47ndUBqxC4">The League of Extraordinary Foundry developers</a> and the main 
+<a target=”_blank” href="https://discord.gg/foundryvtt">Foundry VTT Discord</a> servers too!   
 </td>
 </tr>
 </table>
