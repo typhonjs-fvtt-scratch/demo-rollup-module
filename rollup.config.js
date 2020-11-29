@@ -23,7 +23,6 @@ import { terser }       from 'rollup-plugin-terser'         // Terser is used fo
 // Import config files for Terser and Postcss; refer to respective documentation for more information.
 import terserConfig     from './terser.config';
 import postcssOptions   from './postcss.config'
-// const postcssOptions = require('./OLDOLDOLDpostcss.config');
 
 export default commandLineArgs => {
 
@@ -82,7 +81,7 @@ export default commandLineArgs => {
          sourcemapPathTransform: sourcePath => sourcePath.replace(relativePath, `.`)
       },
       plugins: [
-         postcss(postcssOptions(sourcemap)),
+         postcss(postcssOptions(sourcemap)),                // Engages PostCSS for Sass / CSS processing
          json(),                                            // Allows import of JSON; used in dialog Handlebars content.
          string({ include: ["**/*.css", "**/*.html"] }),    // Allows loading strings as ES6 modules; HTML and CSS.
          replace({                                          // Replaces text in processed source files.
@@ -96,11 +95,11 @@ export default commandLineArgs => {
    // clean. In this case we are just importing `ansi-colors` from NPM. Note that since it is a CJS module that
    // `@rollup/plugin-commonjs` is used to convert it to ES6 and `rollup-plugin-node-globals` injects dummy
    // `process.env` and other globals found in the Node environment as they are referenced by `ansi-colors`.
-   // `ansi-colors` isn't really a good module to import as it is not intended to use in the browser neither is `chalk`
-   // which was what was requested in the League developers Discord which is even more heavyweight w/ dependencies that
-   // bloat the code of a bundle. This is just an example and not recommended regarding use of `ansi-colors`.
-   // Ideally you will be importing NPM modules which are built to run on Node and the browser and also potentially
-   // include ES6 source code. !! Remove this in your own module !!
+   // `ansi-colors` isn't really a good module to import as it is not intended to be used in the browser neither is
+   // `chalk` which was what was requested in the League developers Discord which is even more heavyweight w/
+   // dependencies that bloat the code of a bundle. This is just an example and not recommended regarding use of
+   // `ansi-colors`. Ideally you will be importing NPM modules which are built to run on Node and the browser and also
+   // potentially include ES6 source code. !! Remove this in your own module !!
    {
       input: `module${PS}externals.js`,
       output: {

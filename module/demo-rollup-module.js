@@ -6,8 +6,8 @@ const s_REPLACE_TEXT = 'THIS WILL BE REPLACED WITH - YO!';  // This text will be
 
 /**
  * Shows DemoDialog when the game is ready. Please note that hooks are not asynchronous, but this is a simple demo
- * and we want to await for the dialog result. The throw the error button is meant to test stack trace reversal
- * using NPM module stacktracify - https://www.npmjs.com/package/stacktracify
+ * and we want to await for the dialog result. The throw an error button is meant to test stack trace reversal of
+ * minimized / mangled code using NPM module stacktracify - https://www.npmjs.com/package/stacktracify
  */
 Hooks.once('ready', async () =>
 {

@@ -4,7 +4,8 @@ import dialogHTML from '../templates/dialog.html'     // You can import strings 
 import '../sass/dialog.scss';                         // Import the scss file so Rollup picks it up.
 
 /**
- * Basic dialog extension w/ static show method
+ * Basic dialog extension w/ static show method. Take note of the id passed in at the tail end of the dialog
+ * creation.
  */
 export default class DemoDialog extends Dialog
 {
@@ -54,7 +55,7 @@ export default class DemoDialog extends Dialog
                }
             },
             default: "ok"
-         }, { id: `DemoRollupDialog`}).render(true);
-      });
-   }
-}
+         }, { id: `DemoRollupDialog`}).render(true);  // Take note of passing in the `id` here as `DemoRollupDialog`
+      });                                             // is used as the id in the HTML div tag for the app / dialog.
+   }                                                  // Any Application you create can use the id attribute to target
+}                                                     // CSS output. See `dialog.scss` for an example.

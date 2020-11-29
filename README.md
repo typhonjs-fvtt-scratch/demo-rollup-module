@@ -19,19 +19,19 @@ freely and seamlessly combine the most useful individual functions from your fav
 This demo module integrates several powerful libraries that will greatly extend your development activities. Beyond
 Rollup with source map generation several essential plugins for loading HTML / JSON / copying files / replacing strings 
 are installed along with <a target=”_blank” href="https://postcss.org/">PostCSS</a> & 
-<a target=”_blank” href="https://sass-lang.com/">Sass</a> are configured in addition to 
-<a target=”_blank” href="https://www.npmjs.com/package/terser">Terser</a> and 
-<a target=”_blank” href="https://www.npmjs.com/package/dotenv-safe">dotenv</a> to provide a flexible way to configure 
-various deployment environments. All of the code is well commented especially the 
+<a target=”_blank” href="https://sass-lang.com/">Sass</a> are configured to output all processed CSS to `styles.css` in 
+addition to <a target=”_blank” href="https://www.npmjs.com/package/terser">Terser</a> for conditional minification / 
+mangling and <a target=”_blank” href="https://www.npmjs.com/package/dotenv-safe">dotenv</a> to provide a flexible way 
+to configure various deployment environments. All of the code is well commented especially the 
 <a target=”_blank” href="https://github.com/typhonjs-fvtt/demo-rollup-module/blob/main/rollup.config.js">rollup.config.js</a> 
 file.
 <p></p>
-So what does this repo / demo module do? Something right? Well... The main entry point is 
+So what does this repo / demo module do? Something right? Well... The main entry point  
 <a target=”_blank” href="https://github.com/typhonjs-fvtt/demo-rollup-module/blob/main/module/demo-rollup-module.js">demo-rollup-module.js</a>
 loads an NPM module 
 (<a target=”_blank” href="https://www.npmjs.com/package/ansi-colors">ansi-colors</a>) in an externally separated bundle 
 and is demonstrated by console output. After Foundry has started up and is ready this module pops up a dialog showing the 
-Sass styling of "Hello World" which is loaded via an HTML template and JSON file directly via Handlebars in  
+Sass styling of "Hello World" which is loaded via an HTML template and JSON files directly via Handlebars in  
 <a target=”_blank” href="https://github.com/typhonjs-fvtt/demo-rollup-module/blob/main/module/src/DemoDialog.js#L1-L4">DemoDialog</a>. 
 The dialog shows basic user input using async / await. A second button throws an error and outputs a stack trace w/ 
 line & column numbers in the console. This is for testing source maps with the minified code verifying that one can use 
@@ -42,7 +42,8 @@ by shipping w/ source maps, so open the developer console and check that out too
 <p></p>
 It should be noted that importing CJS NPM modules like ansi-colors is not recommended as it is not built to run 
 in the browser, but how to accomplish this task is demonstrated in addition to cleanly separating this external code
-in its own bundle apart from the main module code.  
+in its own bundle apart from the main module code. Ideally you'll import an ES6 NPM module and just use the 
+`@rollup/plugin-node-resolve` plugin.
 <p></p>
 Installation:
 <ul>
@@ -50,18 +51,21 @@ Installation:
 <li>Run `npm install`</li>
 <li>Use an IDE to run the NPM scripts</li>
 </ul>
-By default the module is bundled into the local `./deploy` or `./dist` directories. You can change the install path
+By default the module is bundled into the local `./deploy` or `./dist` directories. You can change the deploy path
 by modifying the *.env files in the `./env` directory. While the *.env files are checked into this repo normally you 
-would not do this to avoid committing local paths and any other private data your module might need.
-If you are on Windows and the FoundryVTT-Data directory is located in `C:\games\FoundryVTT-Data`
-then change DEPLOY_PATH to `DEPLOY_PATH=C:\games\FoundryVTT-Data\Data\modules\demo-rollup-module`.
-Of course when you start on your own module replace `demo-rollup-module` with the name of the module you are developing.
+would not do this to avoid committing local paths and any other private data your module might need. So remove the 
+line indicated in `.gitignore` for your own module. If you are on Windows and the FoundryVTT-Data directory is located 
+in `C:\games\FoundryVTT-Data` then change DEPLOY_PATH to 
+`DEPLOY_PATH=C:\games\FoundryVTT-Data\Data\modules\demo-rollup-module`. Run the relevant NPM script to deploy the module 
+for local testing. Make sure to restart Foundry the first time deploying locally. Of course when you start on your own 
+module replace `demo-rollup-module` with the name of the module you are developing.
 <p></p>
-This description doesn't cover all the details, so you are left up to explore the repo. The comments in the code and 
-configuration files should provide insight. Best of luck and I hope you enjoy developing for Foundry with Rollup. I will
+The description above doesn't cover all the details, so you are left up to your own to explore the repo. The comments 
+in the code and configuration files should provide insight. This is the essential build & development process for all my 
+"TyphonJS FVTT" modules forthcoming. Best of luck and I hope you enjoy developing for Foundry with Rollup too. I will
 provide more details in time, but feel free to reach out on Discord (MLeahy#4299) or post an issue in this repo. Drop 
 by <a target=”_blank” href="https://discord.gg/47ndUBqxC4">The League of 
-Extraordinary Foundry developers</a> Discord or the main Foundry VTT Discord server too!   
+Extraordinary Foundry developers</a> or the main Foundry VTT Discord servers too!   
 </td>
 </tr>
 </table>

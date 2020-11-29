@@ -7,7 +7,7 @@ export default (sourceMap = false) => {
       extract: `styles.css`,                                // Output to `styles.css` in directory of the bundle
       extensions: ['.scss', '.sass', '.css'],               // File extensions
       plugins: [autoprefixer, postcssPresetEnv],            // Postcss plugins to use
-      sourceMap,                                            // Generate sourcemaps
+      sourceMap,                                            // Potentially generate sourcemaps
       use: ['sass'],                                        // Use sass / dart-sass
    }
 }
