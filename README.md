@@ -87,11 +87,19 @@ directory under your main Foundry installation. If you think you have found a bu
 feature enhancement to the core Foundry code open an 
 <a target=”_blank” href="https://gitlab.com/foundrynet/foundryvtt/-/issues">issue on the main tracker</a>. 
 <p></p>
+A very useful tip if you are using an IDE like JetBrains WebStorm is to add the public foundry scripts directory as
+a second content root to your project. This will enable intelligent code completion for `foundry.js` and can greatly
+aid your understanding of Foundry. Also add the system that you are using such as `dnd5e` (found in 
+`./FoundryVTT-Data/Data/systems/dnd5e`) as a third content root and automatic code completion will be enabled for it as 
+well. Here is a <a target=”_blank” href="https://i.imgur.com/31vHCeP.png">link showing </a> where to enable additional 
+content roots in WebStorm.
+<p></p>
 The description above doesn't cover all the details for Foundry development and using this repo as a starter project, 
-so you are left up to your own to explore the repo for now. The comments in the code and configuration files should provide 
-insight. This is the essential build & development process for all my "TyphonJS FVTT" modules forthcoming. Best of luck 
-and I hope you enjoy developing for Foundry with Rollup too. I will provide more details in time, but feel free to 
-reach out on Discord (MLeahy#4299) or post an issue in this repo. Drop by 
+so you are left up to your own to explore the repo for now. However, this is a ton more information than I had when I 
+got started with Foundry module development a month ago (Oct '20). The comments in the code and configuration files 
+should provide insight. This is the essential build & development process for all my "TyphonJS FVTT" modules forthcoming. 
+Best of luck and I hope you enjoy developing for Foundry with Rollup too. I will provide more details in time, but feel 
+free to reach out on Discord (MLeahy#4299) or post an issue in this repo. Drop by 
 <a target=”_blank” href="https://discord.gg/47ndUBqxC4">The League of Extraordinary Foundry developers</a> and the main 
 <a target=”_blank” href="https://discord.gg/foundryvtt">Foundry VTT Discord</a> servers too!   
 </td>
