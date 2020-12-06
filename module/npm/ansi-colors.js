@@ -1,4 +1,4 @@
-import ansiColors  from 'ansi-colors'         // Imports `ansi-colors` from NPM / node_modules
+import ansiColors  from 'ansi-colors';        // Imports `ansi-colors` from NPM / node_modules
 
 /**
  * The reason to separate out the import of the NPM module to a separate file is so two bundles can be made with

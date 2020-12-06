@@ -8,7 +8,7 @@ export default {
       toplevel: true
    },
 
-   ecma: 2015,
+   ecma: 2020,
 
    module: true
-}
+};

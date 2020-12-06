@@ -1,37 +1,39 @@
-import fs               from 'fs'
-import path             from 'path'
+import fs               from 'fs';
+import path             from 'path';
+
+import dotenv           from 'dotenv-safe';                 // Provides flexible definition of environment variables.
 
 // The following plugins are for the main source bundle.
 
-import copy             from 'rollup-plugin-copy'           // Copies files
-import json             from '@rollup/plugin-json'          // Allows import of JSON; used in dialog Handlebars content.
-import postcss          from 'rollup-plugin-postcss'        // Process Sass / CSS w/ PostCSS
-import replace          from '@rollup/plugin-replace'       // Replaces text in processed source files.
-import { string }       from 'rollup-plugin-string'         // Allows loading strings as ES6 modules.
+import copy             from 'rollup-plugin-copy';          // Copies files
+import json             from '@rollup/plugin-json';         // Allows import of JSON; used in dialog Handlebars content.
+import postcss          from 'rollup-plugin-postcss';       // Process Sass / CSS w/ PostCSS
+import replace          from '@rollup/plugin-replace';      // Replaces text in processed source files.
+import { string }       from 'rollup-plugin-string';        // Allows loading strings as ES6 modules.
 
 // The following plugins are for the 2nd external bundle pulling in `ansi-colors` from NPM.
 
-import commonjs         from '@rollup/plugin-commonjs'      // This converts ansi-colors to ES6 from CJS.
-import globals          from 'rollup-plugin-node-globals'   // This is necessary as ansi-colors references `process.env`.
+import commonjs         from '@rollup/plugin-commonjs';     // This converts ansi-colors to ES6 from CJS.
+import globals          from 'rollup-plugin-node-globals';  // This is necessary as ansi-colors references `process.env`.
 
 // The following plugins are for the 2nd & 3rd external bundles pulling in modules from NPM.
-import resolve          from '@rollup/plugin-node-resolve'  // This resolves NPM modules from node_modules.
+import resolve          from '@rollup/plugin-node-resolve'; // This resolves NPM modules from node_modules.
 
 // This plugin is for importing existing sourcemaps from `unique-names-generator` NPM module. Include it for
 // any external imported source code that has sourcemaps available.
-import sourcemaps from 'rollup-plugin-sourcemaps';
+import sourcemaps       from 'rollup-plugin-sourcemaps';
 
 // Terser is used as an output plugin in both bundles to conditionally minify / mangle the output bundles depending
 // on which NPM script & .env file is referenced.
 
-import { terser }       from 'rollup-plugin-terser'         // Terser is used for minification / mangling
+import { terser }       from 'rollup-plugin-terser';        // Terser is used for minification / mangling
 
 // Import config files for Terser and Postcss; refer to respective documentation for more information.
 import terserConfig     from './terser.config';
-import postcssOptions   from './postcss.config'
+import postcssOptions   from './postcss.config';
 
-export default commandLineArgs => {
-
+export default () =>
+{
    // Load the .env file specified in the command line target into process.env using `dotenv-safe`
    // This is a very convenient and cross platform way to handle environment variables. Please note that the .env
    // files are committed to this repo, but in your module you should uncomment the `**.env` directive in `.gitignore`
@@ -45,7 +47,7 @@ export default commandLineArgs => {
 
    // process.env.TARGET is defined in package.json NPM scripts using the `cross-env` NPM module passing it into
    // running this script. It defines which .env file to use below.
-   require('dotenv-safe').config({
+   dotenv.config({
       example: `${__dirname}${path.sep}env${path.sep}.env.example`,
       path: `${__dirname}${path.sep}env${path.sep}${process.env.TARGET}.env`
    });
@@ -53,7 +55,7 @@ export default commandLineArgs => {
    // Sanity check to make sure parent directory of DEPLOY_PATH exists.
    if (!fs.existsSync(path.dirname(process.env.DEPLOY_PATH)))
    {
-      throw Error('DEPLOY_PATH does not exist: ' + process.env.DEPLOY_PATH)
+      throw Error(`DEPLOY_PATH does not exist: ${process.env.DEPLOY_PATH}`);
    }
 
    // Reverse relative path from the deploy path to local directory; used to replace source maps path.
@@ -64,7 +66,7 @@ export default commandLineArgs => {
    const outputPlugins = [];
    if (process.env.DEPLOY_MINIFY === 'true')
    {
-      outputPlugins.push(terser(terserConfig))
+      outputPlugins.push(terser(terserConfig));
    }
 
    // Defines whether source maps are generated / loaded from the .env file.
@@ -74,7 +76,7 @@ export default commandLineArgs => {
    const DIR = process.env.DEPLOY_PATH;
    const PS = path.sep;
 
-   console.log(`Bundling target: ${process.env.TARGET}`)
+   console.log(`Bundling target: ${process.env.TARGET}`);
 
    return [{
       input: `module${PS}demo-rollup-module.js`,
@@ -87,7 +89,7 @@ export default commandLineArgs => {
          format: 'es',
          plugins: outputPlugins,
          sourcemap,
-         sourcemapPathTransform: sourcePath => sourcePath.replace(relativePath, `.`)
+         sourcemapPathTransform: (sourcePath) => sourcePath.replace(relativePath, `.`)
       },
       plugins: [
          postcss(postcssOptions(sourcemap)),                // Engages PostCSS for Sass / CSS processing
@@ -95,7 +97,7 @@ export default commandLineArgs => {
          string({ include: ["**/*.css", "**/*.html"] }),    // Allows loading strings as ES6 modules; HTML and CSS.
          replace({                                          // Replaces text in processed source files.
             'THIS WILL BE REPLACED WITH - YO!': 'YO!',      // This replacement is located in demo-rollup-module.js
-            delimiters: ['', '']
+            'delimiters': ['', '']
          })
       ]
    },
@@ -116,7 +118,7 @@ export default commandLineArgs => {
          format: 'es',
          plugins: outputPlugins,
          sourcemap,
-         sourcemapPathTransform: sourcePath => sourcePath.replace(relativePath, `.`)
+         sourcemapPathTransform: (sourcePath) => sourcePath.replace(relativePath, `.`)
       },
       plugins: [
          resolve({ browser: true }),                  // This resolves `ansi-colors` from NPM / node_modules.
@@ -135,7 +137,7 @@ export default commandLineArgs => {
          format: 'es',
          plugins: outputPlugins,
          sourcemap,
-         sourcemapPathTransform: sourcePath => sourcePath.replace(relativePath, `.`)
+         sourcemapPathTransform: (sourcePath) => sourcePath.replace(relativePath, `.`)
       },
       plugins: [
          resolve(),                 // This resolves `unique-names-generator` from NPM / node_modules.
@@ -156,7 +158,7 @@ export default commandLineArgs => {
          copy({ targets: [
             { src: `module/module.json`, dest: DIR },       // Copies module.json to destination.
             { src: `module/icons/*`, dest: `${DIR}/icons` } // Copies icon directory to destination.
-         ]}),
+         ] }),
       ]
    }];
-}
+};

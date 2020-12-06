@@ -10,4 +10,4 @@ import { uniqueNamesGenerator } from 'unique-names-generator';
  * are not imported.
  */
 
-export default uniqueNamesGenerator
+export default uniqueNamesGenerator;
