@@ -3,8 +3,6 @@ name: Module Tag / Release
 
 on:
   push:
-    branches:
-      - "!*"
     tags:
       - "v*"
 
