@@ -10,5 +10,9 @@
   "styles": ["styles.css"],
   "esmodules": ["demo-rollup-module.js"],
 
-  "bugs": "https://github.com/typhonjs-fvtt/demo-rollup-module/issues"
+  "bugs": "https://github.com/typhonjs-fvtt/demo-rollup-module/issues",
+  "url": "https://github.com/typhonjs-fvtt/demo-rollup-module",
+
+  "manifest": "https://github.com/typhonjs-fvtt/demo-rollup-module/releases/download/latest/module.json",
+  "download": "https://github.com/typhonjs-fvtt/demo-rollup-module/releases/download/1.0.0/module.zip"
 }
