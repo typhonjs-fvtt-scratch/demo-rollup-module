@@ -9,11 +9,17 @@ import postcss          from 'rollup-plugin-postcss'        // Process Sass / CS
 import replace          from '@rollup/plugin-replace'       // Replaces text in processed source files.
 import { string }       from 'rollup-plugin-string'         // Allows loading strings as ES6 modules.
 
-// The following plugins are for the 2nd external bundle pulling in ansi-colors from NPM.
+// The following plugins are for the 2nd external bundle pulling in `ansi-colors` from NPM.
 
 import commonjs         from '@rollup/plugin-commonjs'      // This converts ansi-colors to ES6 from CJS.
 import globals          from 'rollup-plugin-node-globals'   // This is necessary as ansi-colors references `process.env`.
-import resolve          from '@rollup/plugin-node-resolve'  // This resolves ansi-colors from node_modules.
+
+// The following plugins are for the 2nd & 3rd external bundles pulling in modules from NPM.
+import resolve          from '@rollup/plugin-node-resolve'  // This resolves NPM modules from node_modules.
+
+// This plugin is for importing existing sourcemaps from `unique-names-generator` NPM module. Include it for
+// any external imported source code that has sourcemaps available.
+import sourcemaps from 'rollup-plugin-sourcemaps';
 
 // Terser is used as an output plugin in both bundles to conditionally minify / mangle the output bundles depending
 // on which NPM script & .env file is referenced.
@@ -72,8 +78,11 @@ export default commandLineArgs => {
 
    return [{
       input: `module${PS}demo-rollup-module.js`,
-      external: [ './externals.js' ],                       // Suppresses the warning and excludes ansi-colors from the
-      output: {                                             // main bundle.
+      external: [                                  // Suppresses the warning and excludes ansi-colors from the
+         './npm/ansi-colors.js',                   // main bundle.
+         '../npm/unique-names-generator.js'
+      ],
+      output: {
          file: `${DIR}${PS}demo-rollup-module.js`,
          format: 'es',
          plugins: outputPlugins,
@@ -91,28 +100,46 @@ export default commandLineArgs => {
       ]
    },
 
-   // The external inclusions from NPM is separated into a 2nd bundle. This keeps the main source bundle of your module
-   // clean. In this case we are just importing `ansi-colors` from NPM. Note that since it is a CJS module that
-   // `@rollup/plugin-commonjs` is used to convert it to ES6 and `rollup-plugin-node-globals` injects dummy
-   // `process.env` and other globals found in the Node environment as they are referenced by `ansi-colors`.
+   // The external inclusion of `ansi-colors` from NPM is separated into a 2nd bundle. This keeps the main source
+   // bundle of your module clean. In this case we are just importing `ansi-colors` from NPM. Note that since it is a
+   // CJS module that `@rollup/plugin-commonjs` is used to convert it to ES6 and `rollup-plugin-node-globals` injects
+   // dummy `process.env` and other globals found in the Node environment as they are referenced by `ansi-colors`.
    // `ansi-colors` isn't really a good module to import as it is not intended to be used in the browser neither is
    // `chalk` which was what was requested in the League developers Discord which is even more heavyweight w/
    // dependencies that bloat the code of a bundle. This is just an example and not recommended regarding use of
    // `ansi-colors`. Ideally you will be importing NPM modules which are built to run on Node and the browser and also
    // potentially include ES6 source code. !! Remove this in your own module !!
    {
-      input: `module${PS}externals.js`,
+      input: `module${PS}npm${PS}ansi-colors.js`,
       output: {
-         file: `${DIR}${PS}externals.js`,
+         file: `${DIR}${PS}npm${PS}ansi-colors.js`,
          format: 'es',
          plugins: outputPlugins,
          sourcemap,
          sourcemapPathTransform: sourcePath => sourcePath.replace(relativePath, `.`)
       },
       plugins: [
-         resolve({ browser: true }),                  // This resolves ansi-colors from NPM / node_modules.
-         commonjs(),                                  // This is necessary to convert ansi-colors to ES6 from CJS.
-         globals(),                                   // This is necessary as ansi-colors references `process.env`.
+         resolve({ browser: true }),                  // This resolves `ansi-colors` from NPM / node_modules.
+         commonjs(),                                  // This is necessary to convert `ansi-colors` to ES6 from CJS.
+         globals(),                                   // This is necessary as `ansi-colors` references `process.env`.
+      ]
+   },
+
+   // The external inclusion of `unique-names-generator` from NPM is separated into a 3rd bundle. This keeps the main
+   // source bundle of your module clean. In this case `unique-names-generator` supports an ES module export so
+   // we only need to use `@rollup/plugin-node-resolve`. !! Remove this in your own module !!
+   {
+      input: `module${PS}npm${PS}unique-names-generator.js`,
+      output: {
+         file: `${DIR}${PS}npm${PS}unique-names-generator.js`,
+         format: 'es',
+         plugins: outputPlugins,
+         sourcemap,
+         sourcemapPathTransform: sourcePath => sourcePath.replace(relativePath, `.`)
+      },
+      plugins: [
+         resolve(),                 // This resolves `unique-names-generator` from NPM / node_modules.
+         sourcemaps()               // Import the existing sourcemaps provided by `unique-names-generator`.
       ]
    },
 
@@ -120,6 +147,9 @@ export default commandLineArgs => {
    // and icons are copied to the destination directory. You could easily add this to the main / first bundle action
    // above, but it's good to know you can point to an empty file to separate actions. You'll use the `copy` plugin
    // to copy over any assets, packs or even bare source code depending on your module.
+   //
+   // Note: if you do use the foundry.js `renderTemplate` method of loading templates then also include the `templates`
+   // directory to be copied.
    {
       input: 'empty.js',
       plugins: [

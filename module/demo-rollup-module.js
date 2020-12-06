@@ -1,6 +1,6 @@
-import { ansiColors }   from './externals.js'         // Imports ansi-colors from NPM / node_modules
+import ansiColors from './npm/ansi-colors.js'         // Imports ansi-colors from NPM / node_modules
 
-import DemoDialog       from './src/DemoDialog.js'
+import DemoDialog from './src/DemoDialog.js'
 
 const s_REPLACE_TEXT = 'THIS WILL BE REPLACED WITH - YO!';  // This text will be replaced with 'YO!'
 

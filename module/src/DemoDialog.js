@@ -1,11 +1,19 @@
-import data       from '../json/dialog.json'          // You can import JSON w/ @rollup/plugin-json
-import dialogHTML from '../templates/dialog.html'     // You can import strings w/ rollup-plugin-string
+import uniqueNamesGenerator   from '../npm/unique-names-generator.js'   // Import the npm module
 
-import '../sass/dialog.scss';                         // Import the scss file so Rollup picks it up.
+import dialogHTML             from '../templates/dialog.html'     // You can import strings w/ rollup-plugin-string
+import firstName              from '../json/elf-names-first.json' // You can import JSON w/ @rollup/plugin-json
+import lastName               from '../json/elf-names-last.json'  // First and last elf names are loaded.
+
+import '../sass/dialog.scss';                                     // Import the scss file so Rollup picks it up.
 
 /**
- * Basic dialog extension w/ static show method. Take note of the id passed in at the tail end of the dialog
- * creation.
+ * Basic dialog extension w/ static show method.
+ *
+ * A random elven name is generated with the NPM module `unique-name-generator` with the provided first / last names
+ * in `elf-names-first.json` and `elf-names-last.json` and inserted into a basic HTML template via Handlebars.
+ *
+ * Take note of the id passed in at the tail end of the dialog creation as this provides an id attribute to target
+ * CSS specific for the dialog.
  */
 export default class DemoDialog extends Dialog
 {
@@ -33,17 +41,20 @@ export default class DemoDialog extends Dialog
     */
    static async show()
    {
+      // Create a random `elven` name from the JSON dictionaries provided using the NPM module `unique-names-generator`.
+      const randomName = uniqueNamesGenerator({ dictionaries: [firstName, lastName], separator: ' ' });
+
       return new Promise((resolve) =>
       {
          new DemoDialog({
             title: 'Demo Rollup Dialog',
-            content: Handlebars.compile(dialogHTML)(data),
-            buttons: {
+            content: Handlebars.compile(dialogHTML)({ randomName }), // Use Handlebars to construct the message w/ the
+            buttons: {                                               // random name generated.
                ok: {
                   label: "Ok",
                   callback: async () =>
                   {
-                     resolve(`Dialog OK clicked`);
+                     resolve(`Dialog OK clicked`);                   // Pass back a message via the promise.
                   }
                },
                error: {
