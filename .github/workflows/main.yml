@@ -21,7 +21,7 @@ jobs:
         run: npm ci
 
       # run the build action; choose `build-deploy` if not minifying your output bundle.
-      - name: Build dist directory
+      - name: Build deploy directory
         run: npm run build-deploy-minify
 
       # create a zip file with all files required by the module to add to the release
