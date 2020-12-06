@@ -1,6 +1,6 @@
 {
   "name": "demo-rollup-module",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "homepage": "https://github.com/typhonjs-fvtt/demo-rollup-module",
   "description": "Provides an example using Rollup to create an FVTT module.",
   "license": "MIT",
