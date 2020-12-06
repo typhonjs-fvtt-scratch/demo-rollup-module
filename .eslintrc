@@ -1,0 +1,30 @@
+/**
+ * Loads https://github.com/typhonjs-node-config/typhonjs-config-eslint/blob/master/3.0/basic/es8/server/node/.eslintrc
+ * Loads https://github.com/typhonjs-fvtt/eslint-foundry.js/blob/main/.eslintrc
+ *
+ * NPM: https://www.npmjs.com/package/typhonjs-config-eslint
+ * NPM: https://www.npmjs.com/package/@typhonjs-fvtt/eslint-foundry.js
+ */
+{
+  // ESLint configs are prone to particular choices, so if the first config below doesn't work for you then replace
+  // with one that you do prefer. The second config defines globals defined in `foundry.js` for use w/ `no-shadow`.
+  "extends": [
+    "./node_modules/typhonjs-config-eslint/3.0/basic/es8/server/node/.eslintrc",
+    "./node_modules/@typhonjs-fvtt/eslint-foundry.js/.eslintrc"
+  ],
+
+  // Defines / overrides a few more environment parameters not provided in the configs above.
+  "env": {
+    "jquery": true,
+    "es2020": true,
+    "browser": true
+  },
+
+  // Prevents overwriting any built in globals particularly from `@typhonjs-fvtt/eslint-foundry.js`, but also
+  // node & browser environments.
+  //
+  // Note: if you are using Typescript you must use `@typescript-eslint/no-shadow`
+  "rules": {
+    "no-shadow": ["error", { "builtinGlobals": true, "hoist": "all", "allow": [] }]
+  }
+}
