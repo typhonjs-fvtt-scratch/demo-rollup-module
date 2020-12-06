@@ -24,8 +24,8 @@ Hooks.once('ready', async () =>
 /**
  * Add window listeners to catch errors so we can print out the stack trace.
  */
-window.addEventListener('error', (errorEvent) => { s_ERROR_HANDLER(errorEvent.error); });
-window.addEventListener('unhandledrejection', (errorEvent) => { s_ERROR_HANDLER(errorEvent.reason); });
+window.addEventListener('error', (event) => { s_ERROR_HANDLER(event.error); });
+window.addEventListener('unhandledrejection', (event) => { s_ERROR_HANDLER(event.reason); });
 
 /**
  * Just a convenience to print out the full stack trace in order to be able to use NPM module stacktracify to
