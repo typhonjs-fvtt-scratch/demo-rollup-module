@@ -40,7 +40,8 @@ release format that is required by Foundry VTT when tagging with `vX.X.X` (thank
 [Calego / ElfFriend](https://github.com/ElfFriend-DnD/) for the starter).
 - Two examples of cleanly bundling NPM / Node modules separate of the main module code with a CJS example 
 ([ansi-colors](https://www.npmjs.com/package/ansi-colors)) and an ESM module 
-([unique-names-generator](https://www.npmjs.com/package/unique-names-generator)).  
+([unique-names-generator](https://www.npmjs.com/package/unique-names-generator)). Bundling Node modules is optional in 
+your own module development.
 
 ## Installation:
 - Install Foundry VTT
