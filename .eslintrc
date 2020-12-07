@@ -1,6 +1,6 @@
 /**
  * Loads https://github.com/typhonjs-node-config/typhonjs-config-eslint/blob/master/3.0/basic/es8/server/node/.eslintrc
- * Loads https://github.com/typhonjs-fvtt/eslint-foundry.js/blob/main/.eslintrc
+ * Loads https://github.com/typhonjs-fvtt/eslint-foundry.js/blob/main/config/0.7.8/.eslintrc
  *
  * NPM: https://www.npmjs.com/package/typhonjs-config-eslint
  * NPM: https://www.npmjs.com/package/@typhonjs-fvtt/eslint-foundry.js
@@ -10,7 +10,7 @@
   // with one that you do prefer. The second config defines globals defined in `foundry.js` for use w/ `no-shadow`.
   "extends": [
     "./node_modules/typhonjs-config-eslint/3.0/basic/es8/server/node/.eslintrc",
-    "./node_modules/@typhonjs-fvtt/eslint-foundry.js/.eslintrc"
+    "./node_modules/@typhonjs-fvtt/eslint-foundry.js/config/0.7.8/.eslintrc"
   ],
 
   // Defines / overrides a few more environment parameters not provided in the configs above.

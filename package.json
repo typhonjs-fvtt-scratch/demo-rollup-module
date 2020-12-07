@@ -39,7 +39,7 @@
     "rollup-plugin-string": "^3.0.0",
     "rollup-plugin-terser": "^7.0.0",
     "sass": "^1.0.0",
-    "@typhonjs-fvtt/eslint-foundry.js": "^0.1.0",
+    "@typhonjs-fvtt/eslint-foundry.js": "^0.3.0",
     "typhonjs-config-eslint": "^0.6.0"
   },
   "keywords": [

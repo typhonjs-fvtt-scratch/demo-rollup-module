@@ -13,6 +13,8 @@ Hooks.once('ready', async () =>
 {
    console.log(ansiColors.green('Hello green world from ansi-color NPM module!'));
 
+   renderTemplate = "HAAA";
+
    console.log(ansiColors.green(
     `Just showing that you can do text replacement with a rollup plugin: ${s_REPLACE_TEXT}`));
 
