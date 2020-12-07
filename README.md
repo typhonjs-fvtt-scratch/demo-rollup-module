@@ -34,7 +34,7 @@ have confidence you can debug your module / system.
 preferred setup. More importantly 
 [@typhonjs-fvtt/eslint-foundry.js](https://www.npmjs.com/package/@typhonjs-fvtt/eslint-foundry.js) enables up to date 
 coverage of all globals exported by [foundry.js](https://foundryvtt.com/api/foundry.js.html) and works in tandem w/ 
-the [no-shadow](https://eslint.org/docs/rules/no-shadow) rule preventing overriding any core Foundry globals.
+the [no-shadow](https://eslint.org/docs/rules/no-shadow) rule preventing overriding any core Foundry VTT globals.
 - A [Github Action](https://github.com/features/actions) which automatically prepares and formats your module with the 
 release format that is required by Foundry VTT when tagging with `vX.X.X` (thanks
 [Calego / ElfFriend](https://github.com/ElfFriend-DnD/) for the starter).
