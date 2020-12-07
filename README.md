@@ -8,8 +8,8 @@ powerful / modern bundler that is worth considering for your Foundry development
 
 ## Why:
 
-Foundry embraces modern Javascript / ES Modules (ESM) support, so why not choose a bundler / build tool that does so as 
-well. Rollup is performant with excellent [tree-shaking](https://rollupjs.org/guide/en/#tree-shaking) support for 
+Foundry VTT embraces modern Javascript / ES Modules (ESM) support, so why not choose a bundler / build tool that does so 
+as well. Rollup is performant with excellent [tree-shaking](https://rollupjs.org/guide/en/#tree-shaking) support for 
 delivering reduced sized modules with the latest ESM features. For a full description of this demo repo / module please 
 refer to the [wiki](https://github.com/typhonjs-fvtt/demo-rollup-module/wiki). Below are the highlights.
 
@@ -36,7 +36,7 @@ preferred setup. More importantly
 coverage of all globals exported by [foundry.js](https://foundryvtt.com/api/foundry.js.html) and works in tandem w/ 
 the [no-shadow](https://eslint.org/docs/rules/no-shadow) rule preventing overriding any core Foundry globals.
 - A [Github Action](https://github.com/features/actions) which automatically prepares and formats your module with the 
-release format that is required by Foundry when tagging with `vX.X.X` formatting (thanks 
+release format that is required by Foundry VTT when tagging with `vX.X.X` (thanks
 [Calego / ElfFriend](https://github.com/ElfFriend-DnD/) for the starter).
 - Two examples of cleanly bundling NPM / Node modules separate of the main module code with a CJS example 
 ([ansi-colors](https://www.npmjs.com/package/ansi-colors)) and an ESM module 
@@ -50,7 +50,7 @@ release format that is required by Foundry when tagging with `vX.X.X` formatting
 - Use an IDE to run the NPM scripts
 - Change the deployment path in the `*.env` files as appropriate.
 
-To install this module in Foundry directly use the following link to the `module.json`:
+To install this module in Foundry VTT directly use the following link to the `module.json`:
 - https://github.com/typhonjs-fvtt/demo-rollup-module/releases/latest/download/module.json
 
 ## Contact:
