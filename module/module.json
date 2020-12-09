@@ -3,7 +3,7 @@
   "title": "Demo Rollup Module",
   "description": "Provides an example using Rollup to create an FVTT module.",
   "author": "typhonrt",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "minimumCoreVersion": "0.7.5",
   "compatibleCoreVersion": "1.0.0",
 
@@ -14,5 +14,5 @@
   "url": "https://github.com/typhonjs-fvtt/demo-rollup-module",
 
   "manifest": "https://github.com/typhonjs-fvtt/demo-rollup-module/releases/latest/download/module.json",
-  "download": "https://github.com/typhonjs-fvtt/demo-rollup-module/releases/download/v1.0.0/module.zip"
+  "download": "https://github.com/typhonjs-fvtt/demo-rollup-module/releases/download/v1.1.0/module.zip"
 }
