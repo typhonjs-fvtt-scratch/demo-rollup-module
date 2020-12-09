@@ -157,8 +157,8 @@ export default () =>
       plugins: [
          copy({ targets: [
             { src: `module/module.json`, dest: DIR },       // Copies module.json to destination.
-            { src: `module/icons/*`, dest: `${DIR}/icons` } // Copies icon directory to destination.
-         ] }),
+            { src: `module/copy/*`, dest: DIR }             // Copies all directories / files in `copy` directory to
+         ] }),                                              // destination directory.
       ]
    }];
 };
