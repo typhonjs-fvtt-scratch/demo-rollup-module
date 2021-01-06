@@ -29,8 +29,9 @@ import sourcemaps       from 'rollup-plugin-sourcemaps';
 import { terser }       from 'rollup-plugin-terser';        // Terser is used for minification / mangling
 
 // Import config files for Terser and Postcss; refer to respective documentation for more information.
-import terserConfig     from './terser.config';
-import postcssOptions   from './postcss.config';
+// We are using `require` here in order to be compliant w/ `fvttdev` for testing purposes.
+const terserConfig      = require('./terser.config');
+const postcssConfig     = require('./postcss.config');
 
 export default () =>
 {
@@ -72,6 +73,9 @@ export default () =>
    // Defines whether source maps are generated / loaded from the .env file.
    const sourcemap = process.env.DEPLOY_SOURCEMAPS === 'true';
 
+   // Manually set `sourceMap` for PostCSS configuration.
+   postcssConfig.sourceMap = sourcemap;  // Potentially generate sourcemaps
+
    // Shortcuts
    const DIR = process.env.DEPLOY_PATH;
    const PS = path.sep;
@@ -92,7 +96,7 @@ export default () =>
          sourcemapPathTransform: (sourcePath) => sourcePath.replace(relativePath, `.`)
       },
       plugins: [
-         postcss(postcssOptions(sourcemap)),                // Engages PostCSS for Sass / CSS processing
+         postcss(postcssConfig),                            // Engages PostCSS for Sass / CSS processing
          json(),                                            // Allows import of JSON; used in dialog Handlebars content.
          string({ include: ["**/*.css", "**/*.html"] }),    // Allows loading strings as ES6 modules; HTML and CSS.
          replace({                                          // Replaces text in processed source files.

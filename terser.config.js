@@ -1,4 +1,4 @@
-export default {
+module.exports = {
    compress: {
       booleans_as_integers: true,
       passes: 3
