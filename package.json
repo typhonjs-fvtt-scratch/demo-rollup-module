@@ -53,9 +53,9 @@
   ],
   "scripts": {
     "build-deploy": "cross-env TARGET=build-deploy rollup --config",
-    "build-deploy-minify": "cross-env TARGET=build-deploy-minify rollup --config",
+    "build-deploy-compress": "cross-env TARGET=build-deploy-compress rollup --config",
     "build-dev": "cross-env TARGET=build-dev rollup --config",
-    "build-dev-minify": "cross-env TARGET=build-dev-minify rollup --config",
+    "build-dev-compress": "cross-env TARGET=build-dev-compress rollup --config",
     "eslint": "eslint ."
   },
   "files": [],

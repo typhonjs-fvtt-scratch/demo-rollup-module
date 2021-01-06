@@ -43,8 +43,9 @@ export default () =>
    // parameters are present. This template is located in `./env/.env.example` and can be checked into your repo.
 
    // There are two environment variables loaded from .env files.
-   // process.env.DEPLOY_PATH is the full path for your platform to the destination of your module / bundled code.
-   // process.env.DEPLOY_MINIFY specifies if the bundled code should be minified.
+   // process.env.FVTTDEV_DEPLOY_PATH is the full path to the destination of your module / bundled code.
+   // process.env.FVTTDEV_COMPRESS specifies if the bundled code should be minified.
+   // process.env.FVTTDEV_SOURCEMAPS specifies if the source maps should be generated.
 
    // process.env.TARGET is defined in package.json NPM scripts using the `cross-env` NPM module passing it into
    // running this script. It defines which .env file to use below.
@@ -53,31 +54,31 @@ export default () =>
       path: `${__dirname}${path.sep}env${path.sep}${process.env.TARGET}.env`
    });
 
-   // Sanity check to make sure parent directory of DEPLOY_PATH exists.
-   if (!fs.existsSync(path.dirname(process.env.DEPLOY_PATH)))
+   // Sanity check to make sure parent directory of FVTTDEV_DEPLOY_PATH exists.
+   if (!fs.existsSync(path.dirname(process.env.FVTTDEV_DEPLOY_PATH)))
    {
-      throw Error(`DEPLOY_PATH does not exist: ${process.env.DEPLOY_PATH}`);
+      throw Error(`FVTTDEV_DEPLOY_PATH does not exist: ${process.env.FVTTDEV_DEPLOY_PATH}`);
    }
 
    // Reverse relative path from the deploy path to local directory; used to replace source maps path.
-   const relativePath = path.relative(process.env.DEPLOY_PATH, '.');
+   const relativePath = path.relative(process.env.FVTTDEV_DEPLOY_PATH, '.');
 
    // Defines potential output plugins to use conditionally if the .env file indicates the bundles should be
    // minified / mangled.
    const outputPlugins = [];
-   if (process.env.DEPLOY_MINIFY === 'true')
+   if (process.env.FVTTDEV_COMPRESS === 'true')
    {
       outputPlugins.push(terser(terserConfig));
    }
 
    // Defines whether source maps are generated / loaded from the .env file.
-   const sourcemap = process.env.DEPLOY_SOURCEMAPS === 'true';
+   const sourcemap = process.env.FVTTDEV_SOURCEMAPS === 'true';
 
    // Manually set `sourceMap` for PostCSS configuration.
    postcssConfig.sourceMap = sourcemap;  // Potentially generate sourcemaps
 
    // Shortcuts
-   const DIR = process.env.DEPLOY_PATH;
+   const DIR = process.env.FVTTDEV_DEPLOY_PATH;
    const PS = path.sep;
 
    console.log(`Bundling target: ${process.env.TARGET}`);
