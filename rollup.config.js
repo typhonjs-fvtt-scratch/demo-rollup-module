@@ -30,8 +30,8 @@ import { terser }       from 'rollup-plugin-terser';        // Terser is used fo
 
 // Import config files for Terser and Postcss; refer to respective documentation for more information.
 // We are using `require` here in order to be compliant w/ `fvttdev` for testing purposes.
-const terserConfig      = require('./terser.config');
-const postcssConfig     = require('./postcss.config');
+import terserConfig  from './terser.config.mjs';
+import postcssConfig from './postcss.config.mjs';
 
 export default () =>
 {
