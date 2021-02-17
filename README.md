@@ -1,6 +1,6 @@
 ![demo-rollup-module](https://i.imgur.com/aj1n1L8.png)
 
-[![License](https://img.shields.io/badge/license-MIT-yellowgreen.svg?style=plastic)](https://github.com/typhonjs-fvtt/eslint-foundry.js/blob/main/LICENSE)
+[![License](https://img.shields.io/badge/license-MIT-yellowgreen.svg?style=plastic)](https://github.com/typhonjs-fvtt/demo-rollup-module/blob/main/LICENSE)
 
 This repo provides an example [Foundry VTT](https://foundryvtt.com/) starter project using 
 [Rollup](https://rollupjs.org) to bundle / create a module with best practices integrated out of the gate. Rollup is a 
@@ -32,7 +32,7 @@ configured out of the box to work correctly w/ debug tooling. You can release an
 have confidence you can debug your module / system.
 - [ESLint](https://eslint.org/) configured w/ the rules TyphonJS FVTT modules use which can be swapped out for your 
 preferred setup. More importantly 
-[@typhonjs-fvtt/eslint-foundry.js](https://www.npmjs.com/package/@typhonjs-fvtt/eslint-foundry.js) enables up to date 
+[@typhonjs-fvtt/eslint-config-foundry.js](https://www.npmjs.com/package/@typhonjs-fvtt/eslint-config-foundry.js) enables up to date 
 coverage of all globals exported by [foundry.js](https://foundryvtt.com/api/foundry.js.html) and works in tandem w/ 
 the [no-shadow](https://eslint.org/docs/rules/no-shadow) rule preventing overriding any core Foundry VTT globals.
 - A [Github Action](https://github.com/features/actions) which automatically prepares and formats your module with the 

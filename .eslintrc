@@ -10,7 +10,7 @@
   // with one that you do prefer. The second config defines globals defined in `foundry.js` for use w/ `no-shadow`.
   "extends": [
     "./node_modules/typhonjs-config-eslint/3.0/basic/es8/server/node/.eslintrc",
-    "./node_modules/@typhonjs-fvtt/eslint-foundry.js/config/0.7.8/.eslintrc"
+    "@typhonjs-fvtt/eslint-config-foundry.js"
   ],
 
   // Defines / overrides a few more environment parameters not provided in the configs above.
