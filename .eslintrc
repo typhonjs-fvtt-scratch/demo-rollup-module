@@ -1,9 +1,9 @@
 /**
  * Loads https://github.com/typhonjs-node-config/typhonjs-config-eslint/blob/master/3.0/basic/es8/server/node/.eslintrc
- * Loads https://github.com/typhonjs-fvtt/eslint-foundry.js/blob/main/config/0.7.8/.eslintrc
+ * Loads https://github.com/typhonjs-fvtt/eslint-config-foundry.js/blob/main/0.8.0.js
  *
  * NPM: https://www.npmjs.com/package/typhonjs-config-eslint
- * NPM: https://www.npmjs.com/package/@typhonjs-fvtt/eslint-foundry.js
+ * NPM: https://www.npmjs.com/package/@typhonjs-fvtt/eslint-config-foundry.js
  */
 {
   // ESLint configs are prone to particular choices, so if the first config below doesn't work for you then replace
@@ -20,7 +20,7 @@
     "browser": true
   },
 
-  // Prevents overwriting any built in globals particularly from `@typhonjs-fvtt/eslint-foundry.js`, but also
+  // Prevents overwriting any built in globals particularly from `@typhonjs-fvtt/eslint-config-foundry.js`, but also
   // node & browser environments. `event / window.event` shadowing is allowed due to being a common variable name and
   // an uncommonly used browser feature.
   //
