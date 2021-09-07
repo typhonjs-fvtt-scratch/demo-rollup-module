@@ -102,7 +102,8 @@ export default () =>
          string({ include: ["**/*.css", "**/*.html"] }),    // Allows loading strings as ES6 modules; HTML and CSS.
          replace({                                          // Replaces text in processed source files.
             'THIS WILL BE REPLACED WITH - YO!': 'YO!',      // This replacement is located in demo-rollup-module.js
-            'delimiters': ['', '']
+            'delimiters': ['', ''],
+            'preventAssignment': true
          })
       ]
    },
