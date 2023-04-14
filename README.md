@@ -2,6 +2,13 @@
 
 [![License](https://img.shields.io/badge/license-MIT-yellowgreen.svg?style=plastic)](https://github.com/typhonjs-fvtt/demo-rollup-module/blob/main/LICENSE)
 
+This repo is now archived. The initial purpose of this repo was to demonstrate and expose the idea of using a bundler 
+for Foundry VTT 3rd party development. I have since released significant 3rd party tooling based on Svelte / Vite 
+providing a very modern approach to Foundry VTT package development. Check out those resources at the 
+[typhonjs-fvtt-lib organization](https://github.com/typhonjs-fvtt-lib).
+
+----------
+
 This repo provides an example [Foundry VTT](https://foundryvtt.com/) starter project using 
 [Rollup](https://rollupjs.org) to bundle / create a module with best practices integrated out of the gate. Rollup is a 
 powerful / modern bundler that is worth considering for your Foundry development efforts.
